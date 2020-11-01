@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="CS194 Project4:&nbsp;Facial Keypoint Detection with Neural Networks, Introduction">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>1 Nose Tip Detection</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="1-Nose-Tip-Detection.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 2.27.1, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "index.html"
+}</script>
+    <meta property="og:title" content="1 Nose Tip Detection">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+  </head>
+  <body class="u-body"><header class="u-clearfix u-header u-palette-1-light-3 u-header" id="sec-509c"><div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-palette-1-dark-1 u-text-1">CS194 Project4:&nbsp;<br>Facial Keypoint Detection with Neural Networks&nbsp;
+        </h1>
+        <h4 class="u-text u-text-palette-3-base u-text-2">Sainan Chen<br>11/1/2020
+        </h4>
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0;">
+            <a class="u-active-palette-1-base u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="#">
+              <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="Introduction.html" style="padding: 10px 36px;">Introduction</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="1-Nose-Tip-Detection.html" style="padding: 10px 36px;">1 Nose Tip Detection</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="2-Full-Facial.html" style="padding: 10px 36px;">2 Full Facial Keypoints Detection</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="3-Train-With-Larger-Dataset.html" style="padding: 10px 36px;">3 Train With Larger Dataset</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="Conclusion.html" style="padding: 10px 36px;">Conclusion</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Introduction.html" style="padding: 10px 36px;">Introduction</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="1-Nose-Tip-Detection.html" style="padding: 10px 36px;">1 Nose Tip Detection</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="2-Full-Facial.html" style="padding: 10px 36px;">2 Full Facial Keypoints Detection</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="3-Train-With-Larger-Dataset.html" style="padding: 10px 36px;">3 Train With Larger Dataset</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Conclusion.html" style="padding: 10px 36px;">Conclusion</a>
+</li></ul>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="u-clearfix u-section-1" id="sec-a898">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-1">Dataset</h2>
+        <p class="u-text u-text-2">The dataset I use for this project is from <a href="http://www2.imm.dtu.dk/~aam/datasets/datasets.html" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">IMM Face Database</a>. It contains 240 facial images of 40 person with 6 images from different viewpoints for everyone. For every image, 58 facial key points are labeled. To start with, we only consider the key point 53 which is for nose tip.
+        </p>
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-3">Dataloader</h2>
+        <p class="u-text u-text-4">First, I tried to load first 192 images and their corresponding key points into training dataloader and load last 48 images and their corresponding key points into validation dataloader. Below are some examples of training images with nose tip key point shown on it.</p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
+          <div class="u-gallery-inner u-gallery-inner-1">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at12.21.02AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-1">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide" data-image-width="738" data-image-height="552">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-10-31at10.13.24AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-2">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-10-31at10.13.36AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-3">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-5">CNN Model</h2>
+        <p class="u-text u-text-6">I create a CNN model with input size 80*60, output size 2 and conbination of layers in the middle: conv2 with kernal size 3*3, RELU, maxPool with window 2*2.&nbsp;<br>
+        </p>
+        <img src="images/net1.jpg" alt="" class="u-image u-image-default u-image-1" data-image-width="3508" data-image-height="2480">
+        <p class="u-text u-text-default u-text-7">Then I train the model on training data using 20 epoches. During the training process, we can see the MSE loss of the model on training dataset and validation dataset are both overall decreasing, which means our model is gradually improved with more training epoches.</p>
+        <img src="images/1loss.png" alt="" class="u-image u-image-default u-image-2" data-image-width="918" data-image-height="564">
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-8">Result</h2>
+        <p class="u-text u-text-9">After the training process, I apply the model onto training data and validation data again. Following are some examples showing how well the simple model does on predicting the nose tips.&nbsp; Blue point indicates the ground truth nose tip, and red point indicates&nbsp; the point predicted by my model.</p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-2">
+          <div class="u-gallery-inner u-gallery-inner-2">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/0.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-4">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/5.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-5">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/19.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-6">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="u-text u-text-default u-text-10">The model predicts well on these three images. One thing that we can notice here is the photo is taken right in front of the person for all three images, and this might be the reason why it's not hard for model to figure out the nose tip, which is around the center of the face.</p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-3">
+          <div class="u-gallery-inner u-gallery-inner-3">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/27.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-7">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/58.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-8">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/106.jpg">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-9">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="u-text u-text-default u-text-11">These three predictions, however, are not as good as the examples above. One possible reason is that the image captures the side view of the face, which makes the prediction much harder.</p>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b697"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sainan Chen</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="https://nicepage.com/" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  </body>
+</html>

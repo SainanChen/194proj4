@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="CS194 Project4:&nbsp;Facial Keypoint Detection with Neural Networks, Dataloader, CNN Model">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>3 Train With Larger Dataset</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="3-Train-With-Larger-Dataset.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 2.27.1, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "index.html"
+}</script>
+    <meta property="og:title" content="3 Train With Larger Dataset">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+  </head>
+  <body class="u-body"><header class="u-clearfix u-header u-palette-1-light-3 u-header" id="sec-509c"><div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-palette-1-dark-1 u-text-1">CS194 Project4:&nbsp;<br>Facial Keypoint Detection with Neural Networks&nbsp;
+        </h1>
+        <h4 class="u-text u-text-palette-3-base u-text-2">Sainan Chen<br>11/1/2020
+        </h4>
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0;">
+            <a class="u-active-palette-1-base u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="#">
+              <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="Introduction.html" style="padding: 10px 36px;">Introduction</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="1-Nose-Tip-Detection.html" style="padding: 10px 36px;">1 Nose Tip Detection</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="2-Full-Facial.html" style="padding: 10px 36px;">2 Full Facial Keypoints Detection</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="3-Train-With-Larger-Dataset.html" style="padding: 10px 36px;">3 Train With Larger Dataset</a>
+</li><li class="u-nav-item"><a class="u-active-palette-1-base u-button-style u-nav-link u-text-active-white u-text-hover-palette-3-base u-text-palette-1-base" href="Conclusion.html" style="padding: 10px 36px;">Conclusion</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Introduction.html" style="padding: 10px 36px;">Introduction</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="1-Nose-Tip-Detection.html" style="padding: 10px 36px;">1 Nose Tip Detection</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="2-Full-Facial.html" style="padding: 10px 36px;">2 Full Facial Keypoints Detection</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="3-Train-With-Larger-Dataset.html" style="padding: 10px 36px;">3 Train With Larger Dataset</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Conclusion.html" style="padding: 10px 36px;">Conclusion</a>
+</li></ul>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="u-clearfix u-section-1" id="sec-34e0">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-1">Dataloader</h2>
+        <p class="u-text u-text-2">For this part, we are going to use a much larger dataset from&nbsp;<a href="https://people.eecs.berkeley.edu/~zhecao/ibug_300W_large_face_landmark_dataset.zip" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">300W_large_face_landmark_dataset</a>. It contains 6666 images with some people in it, but the faces may take a small portion of the image. Therefore, I start by cropping the image so that we mainly have one face on a 224*224 image. Then I do augmentation with shift (offset&lt;=10) and rotation (degree&lt;=15) again.&nbsp;
+        </p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
+          <div class="u-gallery-inner u-gallery-inner-1">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.22.01AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-1">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.21.56AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-2">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.12.55AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-3">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item" data-image-width="500" data-image-height="482">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.12.25AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-4">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item" data-image-width="432" data-image-height="434">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.22.13AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-5">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item" data-image-width="434" data-image-height="442">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at4.22.08AM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-6">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-3">CNN Model</h2>
+        <p class="u-text u-text-4">For this part, we are going to use a predefined model called RESNET18. The structure of the model is shown below. The only two modifications are:<br>1. Changing the <b>input size</b> to 1*224*224 so it can take <b>grey images</b>.<br>2. Changing the <b>output size</b> to 138, which represent <b>coordinates of 68 key points</b>.
+        </p>
+        <img src="images/Proposed-Modified-ResNet-18-architecture-for-Bangla-HCR-In-the-diagram-conv-stands-for.png.jpeg" alt="" class="u-image u-image-default u-image-1" data-image-width="850" data-image-height="334">
+        <p class="u-text u-text-default u-text-5">Becuase it takes a long time to iterate through all of the 6666 images for every epoch, this time we only train the model for 5 epoches. Below are the training and validation losses across those iterations.</p>
+        <img src="images/ScreenShot2020-11-01at12.35.42PM.png" alt="" class="u-image u-image-default u-image-2" data-image-width="802" data-image-height="520">
+        <p class="u-text u-text-6">We can see the loss decreases dramatically after the first epoch and then keeps decreasing gradually for follow epoches. The MSE for the whole training dataset is 43.4 after the last epoch.</p>
+        <h2 class="u-text u-text-default u-text-palette-3-base u-text-7">Results</h2>
+        <p class="u-text u-text-8">Now we can see how the model performs on the training dataset as well as some new image inputs.<br>
+          <br>Following are 3 examples from training dataset.
+        </p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-2">
+          <div class="u-gallery-inner u-gallery-inner-2">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at12.36.18PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-7">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at12.36.41PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-8">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at12.39.28PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-9">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="u-text u-text-default u-text-9">Overall the model can predict the key points and the shape of the face, although it's not so accurate due to the limited training epoches.&nbsp;<br>
+          <br>Then we can test the model on some new image inputs, which are actually the images that I used for last project about face morphing.
+        </p>
+        <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-3">
+          <div class="u-gallery-inner u-gallery-inner-3">
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at1.01.12PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-10">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at1.03.16PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-11">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+            <div class="u-effect-fade u-gallery-item">
+              <div class="u-back-slide">
+                <img class="u-back-image u-expanded" src="images/ScreenShot2020-11-01at1.06.53PM.png">
+              </div>
+              <div class="u-over-slide u-shading u-over-slide-12">
+                <h3 class="u-gallery-heading"></h3>
+                <p class="u-gallery-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="u-text u-text-default u-text-10">Wow! For last project, I had to manually annotate key points on faces, but now I can use the NN model to do the auto prediction, and actually it performs quite well! When the image is on the sideview of the face, the prediction is not as well as the front-view ones, but the errors look reasonable.</p>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b697"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sainan Chen</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="https://nicepage.com/" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  </body>
+</html>
